@@ -1,0 +1,75 @@
+﻿@model RegistroCrud.test_usuario
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>test_usuario</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_tipoUsuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_tipoUsuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_nombreCompleto)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_nombreCompleto)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_correo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_correo)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_tipoIdent)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_tipoIdent)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_usuario)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_usuario)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_clave)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_clave)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.usu_activo)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.usu_activo)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.usu_ced }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

@@ -1,0 +1,64 @@
+﻿@model IEnumerable<RegistroCrud.test_usuario>
+
+@{
+    ViewBag.Title = "Mostrar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Crear nuevo", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Cédula
+        </th>
+        <th>
+            Tipo de usuario
+        </th>
+        <th>
+            Nombre Completo
+        </th>
+        <th>
+            Correo
+        </th>
+        <th>
+            Tipo de identificación
+        </th>
+        <th>
+            Usuario
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.usu_ced)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.usu_tipoUsuario)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.usu_nombreCompleto)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.usu_correo)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.usu_tipoIdent)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.usu_usuario)
+    </td>
+    <td>
+        @Html.ActionLink("Edit", "Edit", new { id = item.usu_ced }) |
+        @Html.ActionLink("Details", "Details", new { id = item.usu_ced }) |
+        @Html.ActionLink("Delete", "Delete", new { id = item.usu_ced })
+    </td>
+</tr>
+}
+
+</table>

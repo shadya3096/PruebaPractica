@@ -1,0 +1,122 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_RegistroCrudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="test_habilidades">
+    <Key>
+      <PropertyRef Name="hab_id" />
+    </Key>
+    <Property Name="hab_id" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="hab_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="test_habilidades_usuario" Relationship="Self.fk_habId" FromRole="test_habilidades" ToRole="test_habilidades_usuario" />
+  </EntityType>
+  <EntityType Name="test_habilidades_usuario">
+    <Key>
+      <PropertyRef Name="habilidades_usuario_usuCed" />
+      <PropertyRef Name="habilidades_usuario_habId" />
+    </Key>
+    <Property Name="habilidades_usuario_usuCed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="habilidades_usuario_habId" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="habilidades_usuario_activo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="test_habilidades" Relationship="Self.fk_habId" FromRole="test_habilidades_usuario" ToRole="test_habilidades" />
+    <NavigationProperty Name="test_usuario" Relationship="Self.fk_usuId" FromRole="test_habilidades_usuario" ToRole="test_usuario" />
+  </EntityType>
+  <EntityType Name="test_usuario">
+    <Key>
+      <PropertyRef Name="usu_ced" />
+    </Key>
+    <Property Name="usu_ced" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="usu_tipoUsuario" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="usu_nombreCompleto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="usu_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="usu_tipoIdent" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+    <Property Name="usu_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="usu_clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="usu_activo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="test_habilidades_usuario" Relationship="Self.fk_usuId" FromRole="test_usuario" ToRole="test_habilidades_usuario" />
+  </EntityType>
+  <Association Name="fk_habId">
+    <End Role="test_habilidades" Type="Self.test_habilidades" Multiplicity="1" />
+    <End Role="test_habilidades_usuario" Type="Self.test_habilidades_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="test_habilidades">
+        <PropertyRef Name="hab_id" />
+      </Principal>
+      <Dependent Role="test_habilidades_usuario">
+        <PropertyRef Name="habilidades_usuario_habId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_usuId">
+    <End Role="test_usuario" Type="Self.test_usuario" Multiplicity="1" />
+    <End Role="test_habilidades_usuario" Type="Self.test_habilidades_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="test_usuario">
+        <PropertyRef Name="usu_ced" />
+      </Principal>
+      <Dependent Role="test_habilidades_usuario">
+        <PropertyRef Name="habilidades_usuario_usuCed" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DB_RegistroCrudEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="test_habilidades" EntityType="Self.test_habilidades" />
+    <EntitySet Name="test_habilidades_usuario" EntityType="Self.test_habilidades_usuario" />
+    <EntitySet Name="test_usuario" EntityType="Self.test_usuario" />
+    <AssociationSet Name="fk_habId" Association="Self.fk_habId">
+      <End Role="test_habilidades" EntitySet="test_habilidades" />
+      <End Role="test_habilidades_usuario" EntitySet="test_habilidades_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="fk_usuId" Association="Self.fk_usuId">
+      <End Role="test_usuario" EntitySet="test_usuario" />
+      <End Role="test_habilidades_usuario" EntitySet="test_habilidades_usuario" />
+    </AssociationSet>
+    <FunctionImport Name="test_actualizar">
+      <Parameter Name="tipo" Mode="In" Type="String" />
+      <Parameter Name="nombreCompleto" Mode="In" Type="String" />
+      <Parameter Name="correo" Mode="In" Type="String" />
+      <Parameter Name="tipoIdent" Mode="In" Type="String" />
+      <Parameter Name="ced" Mode="In" Type="String" />
+      <Parameter Name="usuario" Mode="In" Type="String" />
+      <Parameter Name="clave" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="test_eliminar" ReturnType="Collection(String)">
+      <Parameter Name="ced" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="test_insertar">
+      <Parameter Name="tipoUsuario" Mode="In" Type="String" />
+      <Parameter Name="nombreCompleto" Mode="In" Type="String" />
+      <Parameter Name="correo" Mode="In" Type="String" />
+      <Parameter Name="tipoIdent" Mode="In" Type="String" />
+      <Parameter Name="ced" Mode="In" Type="String" />
+      <Parameter Name="usuario" Mode="In" Type="String" />
+      <Parameter Name="clave" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="test_insertarHabilidad">
+      <Parameter Name="hab" Mode="In" Type="String" />
+      <Parameter Name="ced" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="test_login" ReturnType="Collection(DB_RegistroCrudModel.test_login_Result)">
+      <Parameter Name="usuario" Mode="In" Type="String" />
+      <Parameter Name="clave" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="test_mostrar" ReturnType="Collection(DB_RegistroCrudModel.test_mostrar_Result)" />
+    <FunctionImport Name="test_mostrarHabilidades" ReturnType="Collection(String)" />
+  </EntityContainer>
+  <ComplexType Name="test_login_Result">
+    <Property Type="String" Name="usu_ced" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="usu_tipoUsuario" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="usu_nombreCompleto" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="usu_correo" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="usu_tipoIdent" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="usu_usuario" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="usu_clave" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="usu_activo" Nullable="false" MaxLength="1" />
+  </ComplexType>
+  <ComplexType Name="test_mostrar_Result">
+    <Property Type="String" Name="usu_ced" Nullable="false" MaxLength="50" />
+    <Property Type="String" Name="usu_tipoUsuario" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="usu_nombreCompleto" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="usu_correo" Nullable="false" MaxLength="100" />
+    <Property Type="String" Name="usu_tipoIdent" Nullable="false" MaxLength="3" />
+    <Property Type="String" Name="usu_usuario" Nullable="false" MaxLength="50" />
+  </ComplexType>
+</Schema>

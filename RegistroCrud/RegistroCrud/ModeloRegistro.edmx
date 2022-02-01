@@ -1,0 +1,320 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="DB_RegistroCrudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="test_habilidades">
+          <Key>
+            <PropertyRef Name="hab_id" />
+          </Key>
+          <Property Name="hab_id" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="hab_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="test_habilidades_usuario">
+          <Key>
+            <PropertyRef Name="habilidades_usuario_usuCed" />
+            <PropertyRef Name="habilidades_usuario_habId" />
+          </Key>
+          <Property Name="habilidades_usuario_usuCed" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="habilidades_usuario_habId" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="habilidades_usuario_activo" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <EntityType Name="test_usuario">
+          <Key>
+            <PropertyRef Name="usu_ced" />
+          </Key>
+          <Property Name="usu_ced" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="usu_tipoUsuario" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="usu_nombreCompleto" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="usu_correo" Type="varchar" MaxLength="100" Nullable="false" />
+          <Property Name="usu_tipoIdent" Type="char" MaxLength="3" Nullable="false" />
+          <Property Name="usu_usuario" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="usu_clave" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="usu_activo" Type="char" MaxLength="1" Nullable="false" />
+        </EntityType>
+        <Association Name="fk_habId">
+          <End Role="test_habilidades" Type="Self.test_habilidades" Multiplicity="1" />
+          <End Role="test_habilidades_usuario" Type="Self.test_habilidades_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test_habilidades">
+              <PropertyRef Name="hab_id" />
+            </Principal>
+            <Dependent Role="test_habilidades_usuario">
+              <PropertyRef Name="habilidades_usuario_habId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuId">
+          <End Role="test_usuario" Type="Self.test_usuario" Multiplicity="1" />
+          <End Role="test_habilidades_usuario" Type="Self.test_habilidades_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test_usuario">
+              <PropertyRef Name="usu_ced" />
+            </Principal>
+            <Dependent Role="test_habilidades_usuario">
+              <PropertyRef Name="habilidades_usuario_usuCed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Function Name="test_actualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipo" Type="char" Mode="In" />
+          <Parameter Name="nombreCompleto" Type="varchar" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="tipoIdent" Type="char" Mode="In" />
+          <Parameter Name="ced" Type="varchar" Mode="In" />
+          <Parameter Name="usuario" Type="varchar" Mode="In" />
+          <Parameter Name="clave" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="test_eliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ced" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="test_insertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="tipoUsuario" Type="char" Mode="In" />
+          <Parameter Name="nombreCompleto" Type="varchar" Mode="In" />
+          <Parameter Name="correo" Type="varchar" Mode="In" />
+          <Parameter Name="tipoIdent" Type="char" Mode="In" />
+          <Parameter Name="ced" Type="varchar" Mode="In" />
+          <Parameter Name="usuario" Type="varchar" Mode="In" />
+          <Parameter Name="clave" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="test_insertarHabilidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="hab" Type="char" Mode="In" />
+          <Parameter Name="ced" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="test_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="usuario" Type="varchar" Mode="In" />
+          <Parameter Name="clave" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="test_mostrar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="test_mostrarHabilidades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <EntityContainer Name="DB_RegistroCrudModelStoreContainer">
+          <EntitySet Name="test_habilidades" EntityType="Self.test_habilidades" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="test_habilidades_usuario" EntityType="Self.test_habilidades_usuario" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="test_usuario" EntityType="Self.test_usuario" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="fk_habId" Association="Self.fk_habId">
+            <End Role="test_habilidades" EntitySet="test_habilidades" />
+            <End Role="test_habilidades_usuario" EntitySet="test_habilidades_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuId" Association="Self.fk_usuId">
+            <End Role="test_usuario" EntitySet="test_usuario" />
+            <End Role="test_habilidades_usuario" EntitySet="test_habilidades_usuario" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="DB_RegistroCrudModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="test_habilidades">
+          <Key>
+            <PropertyRef Name="hab_id" />
+          </Key>
+          <Property Name="hab_id" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="hab_nombre" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="test_habilidades_usuario" Relationship="Self.fk_habId" FromRole="test_habilidades" ToRole="test_habilidades_usuario" />
+        </EntityType>
+        <EntityType Name="test_habilidades_usuario">
+          <Key>
+            <PropertyRef Name="habilidades_usuario_usuCed" />
+            <PropertyRef Name="habilidades_usuario_habId" />
+          </Key>
+          <Property Name="habilidades_usuario_usuCed" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="habilidades_usuario_habId" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="habilidades_usuario_activo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="test_habilidades" Relationship="Self.fk_habId" FromRole="test_habilidades_usuario" ToRole="test_habilidades" />
+          <NavigationProperty Name="test_usuario" Relationship="Self.fk_usuId" FromRole="test_habilidades_usuario" ToRole="test_usuario" />
+        </EntityType>
+        <EntityType Name="test_usuario">
+          <Key>
+            <PropertyRef Name="usu_ced" />
+          </Key>
+          <Property Name="usu_ced" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_tipoUsuario" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="usu_nombreCompleto" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_correo" Type="String" MaxLength="100" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_tipoIdent" Type="String" MaxLength="3" FixedLength="true" Unicode="false" Nullable="false" />
+          <Property Name="usu_usuario" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_clave" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="usu_activo" Type="String" MaxLength="1" FixedLength="true" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="test_habilidades_usuario" Relationship="Self.fk_usuId" FromRole="test_usuario" ToRole="test_habilidades_usuario" />
+        </EntityType>
+        <Association Name="fk_habId">
+          <End Role="test_habilidades" Type="Self.test_habilidades" Multiplicity="1" />
+          <End Role="test_habilidades_usuario" Type="Self.test_habilidades_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test_habilidades">
+              <PropertyRef Name="hab_id" />
+            </Principal>
+            <Dependent Role="test_habilidades_usuario">
+              <PropertyRef Name="habilidades_usuario_habId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="fk_usuId">
+          <End Role="test_usuario" Type="Self.test_usuario" Multiplicity="1" />
+          <End Role="test_habilidades_usuario" Type="Self.test_habilidades_usuario" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="test_usuario">
+              <PropertyRef Name="usu_ced" />
+            </Principal>
+            <Dependent Role="test_habilidades_usuario">
+              <PropertyRef Name="habilidades_usuario_usuCed" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="DB_RegistroCrudEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="test_habilidades" EntityType="Self.test_habilidades" />
+          <EntitySet Name="test_habilidades_usuario" EntityType="Self.test_habilidades_usuario" />
+          <EntitySet Name="test_usuario" EntityType="Self.test_usuario" />
+          <AssociationSet Name="fk_habId" Association="Self.fk_habId">
+            <End Role="test_habilidades" EntitySet="test_habilidades" />
+            <End Role="test_habilidades_usuario" EntitySet="test_habilidades_usuario" />
+          </AssociationSet>
+          <AssociationSet Name="fk_usuId" Association="Self.fk_usuId">
+            <End Role="test_usuario" EntitySet="test_usuario" />
+            <End Role="test_habilidades_usuario" EntitySet="test_habilidades_usuario" />
+          </AssociationSet>
+          <FunctionImport Name="test_actualizar">
+            <Parameter Name="tipo" Mode="In" Type="String" />
+            <Parameter Name="nombreCompleto" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="tipoIdent" Mode="In" Type="String" />
+            <Parameter Name="ced" Mode="In" Type="String" />
+            <Parameter Name="usuario" Mode="In" Type="String" />
+            <Parameter Name="clave" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="test_eliminar" ReturnType="Collection(String)">
+            <Parameter Name="ced" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="test_insertar">
+            <Parameter Name="tipoUsuario" Mode="In" Type="String" />
+            <Parameter Name="nombreCompleto" Mode="In" Type="String" />
+            <Parameter Name="correo" Mode="In" Type="String" />
+            <Parameter Name="tipoIdent" Mode="In" Type="String" />
+            <Parameter Name="ced" Mode="In" Type="String" />
+            <Parameter Name="usuario" Mode="In" Type="String" />
+            <Parameter Name="clave" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="test_insertarHabilidad">
+            <Parameter Name="hab" Mode="In" Type="String" />
+            <Parameter Name="ced" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="test_login" ReturnType="Collection(DB_RegistroCrudModel.test_login_Result)">
+            <Parameter Name="usuario" Mode="In" Type="String" />
+            <Parameter Name="clave" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="test_mostrar" ReturnType="Collection(DB_RegistroCrudModel.test_mostrar_Result)" />
+          <FunctionImport Name="test_mostrarHabilidades" ReturnType="Collection(String)" />
+        </EntityContainer>
+        <ComplexType Name="test_login_Result">
+          <Property Type="String" Name="usu_ced" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="usu_tipoUsuario" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="usu_nombreCompleto" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="usu_correo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="usu_tipoIdent" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="usu_usuario" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="usu_clave" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="usu_activo" Nullable="false" MaxLength="1" />
+        </ComplexType>
+        <ComplexType Name="test_mostrar_Result">
+          <Property Type="String" Name="usu_ced" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="usu_tipoUsuario" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="usu_nombreCompleto" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="usu_correo" Nullable="false" MaxLength="100" />
+          <Property Type="String" Name="usu_tipoIdent" Nullable="false" MaxLength="3" />
+          <Property Type="String" Name="usu_usuario" Nullable="false" MaxLength="50" />
+        </ComplexType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="DB_RegistroCrudModelStoreContainer" CdmEntityContainer="DB_RegistroCrudEntities">
+          <EntitySetMapping Name="test_habilidades">
+            <EntityTypeMapping TypeName="DB_RegistroCrudModel.test_habilidades">
+              <MappingFragment StoreEntitySet="test_habilidades">
+                <ScalarProperty Name="hab_id" ColumnName="hab_id" />
+                <ScalarProperty Name="hab_nombre" ColumnName="hab_nombre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="test_habilidades_usuario">
+            <EntityTypeMapping TypeName="DB_RegistroCrudModel.test_habilidades_usuario">
+              <MappingFragment StoreEntitySet="test_habilidades_usuario">
+                <ScalarProperty Name="habilidades_usuario_usuCed" ColumnName="habilidades_usuario_usuCed" />
+                <ScalarProperty Name="habilidades_usuario_habId" ColumnName="habilidades_usuario_habId" />
+                <ScalarProperty Name="habilidades_usuario_activo" ColumnName="habilidades_usuario_activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="test_usuario">
+            <EntityTypeMapping TypeName="DB_RegistroCrudModel.test_usuario">
+              <MappingFragment StoreEntitySet="test_usuario">
+                <ScalarProperty Name="usu_ced" ColumnName="usu_ced" />
+                <ScalarProperty Name="usu_tipoUsuario" ColumnName="usu_tipoUsuario" />
+                <ScalarProperty Name="usu_nombreCompleto" ColumnName="usu_nombreCompleto" />
+                <ScalarProperty Name="usu_correo" ColumnName="usu_correo" />
+                <ScalarProperty Name="usu_tipoIdent" ColumnName="usu_tipoIdent" />
+                <ScalarProperty Name="usu_usuario" ColumnName="usu_usuario" />
+                <ScalarProperty Name="usu_clave" ColumnName="usu_clave" />
+                <ScalarProperty Name="usu_activo" ColumnName="usu_activo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="test_actualizar" FunctionName="DB_RegistroCrudModel.Store.test_actualizar" />
+          <FunctionImportMapping FunctionImportName="test_eliminar" FunctionName="DB_RegistroCrudModel.Store.test_eliminar" />
+          <FunctionImportMapping FunctionImportName="test_insertar" FunctionName="DB_RegistroCrudModel.Store.test_insertar" />
+          <FunctionImportMapping FunctionImportName="test_insertarHabilidad" FunctionName="DB_RegistroCrudModel.Store.test_insertarHabilidad" />
+          <FunctionImportMapping FunctionImportName="test_login" FunctionName="DB_RegistroCrudModel.Store.test_login">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_RegistroCrudModel.test_login_Result">
+                <ScalarProperty Name="usu_ced" ColumnName="usu_ced" />
+                <ScalarProperty Name="usu_tipoUsuario" ColumnName="usu_tipoUsuario" />
+                <ScalarProperty Name="usu_nombreCompleto" ColumnName="usu_nombreCompleto" />
+                <ScalarProperty Name="usu_correo" ColumnName="usu_correo" />
+                <ScalarProperty Name="usu_tipoIdent" ColumnName="usu_tipoIdent" />
+                <ScalarProperty Name="usu_usuario" ColumnName="usu_usuario" />
+                <ScalarProperty Name="usu_clave" ColumnName="usu_clave" />
+                <ScalarProperty Name="usu_activo" ColumnName="usu_activo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="test_mostrar" FunctionName="DB_RegistroCrudModel.Store.test_mostrar">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="DB_RegistroCrudModel.test_mostrar_Result">
+                <ScalarProperty Name="usu_ced" ColumnName="usu_ced" />
+                <ScalarProperty Name="usu_tipoUsuario" ColumnName="usu_tipoUsuario" />
+                <ScalarProperty Name="usu_nombreCompleto" ColumnName="usu_nombreCompleto" />
+                <ScalarProperty Name="usu_correo" ColumnName="usu_correo" />
+                <ScalarProperty Name="usu_tipoIdent" ColumnName="usu_tipoIdent" />
+                <ScalarProperty Name="usu_usuario" ColumnName="usu_usuario" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="test_mostrarHabilidades" FunctionName="DB_RegistroCrudModel.Store.test_mostrarHabilidades" />
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Ninguno" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

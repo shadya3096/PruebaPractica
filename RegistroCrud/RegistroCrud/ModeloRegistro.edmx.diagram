@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="20fc46f6cf564a279a8a6a3c537aa171" Name="Diagram1">
+        <EntityTypeShape EntityType="DB_RegistroCrudModel.test_habilidades" Width="1.875" PointX="4.75" PointY="1" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_RegistroCrudModel.test_habilidades_usuario" Width="1.5" PointX="1.25" PointY="2.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="DB_RegistroCrudModel.test_usuario" Width="1.5" PointX="5.125" PointY="4.5" IsExpanded="true" />
+        <AssociationConnector Association="DB_RegistroCrudModel.fk_habId" ManuallyRouted="false" />
+        <AssociationConnector Association="DB_RegistroCrudModel.fk_usuId" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

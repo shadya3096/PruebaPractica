@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DB_RegistroCrudModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="test_habilidades">
+    <Key>
+      <PropertyRef Name="hab_id" />
+    </Key>
+    <Property Name="hab_id" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="hab_nombre" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="test_habilidades_usuario">
+    <Key>
+      <PropertyRef Name="habilidades_usuario_usuCed" />
+      <PropertyRef Name="habilidades_usuario_habId" />
+    </Key>
+    <Property Name="habilidades_usuario_usuCed" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="habilidades_usuario_habId" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="habilidades_usuario_activo" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <EntityType Name="test_usuario">
+    <Key>
+      <PropertyRef Name="usu_ced" />
+    </Key>
+    <Property Name="usu_ced" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="usu_tipoUsuario" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="usu_nombreCompleto" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="usu_correo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="usu_tipoIdent" Type="char" MaxLength="3" Nullable="false" />
+    <Property Name="usu_usuario" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="usu_clave" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="usu_activo" Type="char" MaxLength="1" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_habId">
+    <End Role="test_habilidades" Type="Self.test_habilidades" Multiplicity="1" />
+    <End Role="test_habilidades_usuario" Type="Self.test_habilidades_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="test_habilidades">
+        <PropertyRef Name="hab_id" />
+      </Principal>
+      <Dependent Role="test_habilidades_usuario">
+        <PropertyRef Name="habilidades_usuario_habId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_usuId">
+    <End Role="test_usuario" Type="Self.test_usuario" Multiplicity="1" />
+    <End Role="test_habilidades_usuario" Type="Self.test_habilidades_usuario" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="test_usuario">
+        <PropertyRef Name="usu_ced" />
+      </Principal>
+      <Dependent Role="test_habilidades_usuario">
+        <PropertyRef Name="habilidades_usuario_usuCed" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="test_actualizar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tipo" Type="char" Mode="In" />
+    <Parameter Name="nombreCompleto" Type="varchar" Mode="In" />
+    <Parameter Name="correo" Type="varchar" Mode="In" />
+    <Parameter Name="tipoIdent" Type="char" Mode="In" />
+    <Parameter Name="ced" Type="varchar" Mode="In" />
+    <Parameter Name="usuario" Type="varchar" Mode="In" />
+    <Parameter Name="clave" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="test_eliminar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ced" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="test_insertar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="tipoUsuario" Type="char" Mode="In" />
+    <Parameter Name="nombreCompleto" Type="varchar" Mode="In" />
+    <Parameter Name="correo" Type="varchar" Mode="In" />
+    <Parameter Name="tipoIdent" Type="char" Mode="In" />
+    <Parameter Name="ced" Type="varchar" Mode="In" />
+    <Parameter Name="usuario" Type="varchar" Mode="In" />
+    <Parameter Name="clave" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="test_insertarHabilidad" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="hab" Type="char" Mode="In" />
+    <Parameter Name="ced" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="test_login" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="usuario" Type="varchar" Mode="In" />
+    <Parameter Name="clave" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="test_mostrar" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="test_mostrarHabilidades" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="DB_RegistroCrudModelStoreContainer">
+    <EntitySet Name="test_habilidades" EntityType="Self.test_habilidades" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="test_habilidades_usuario" EntityType="Self.test_habilidades_usuario" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="test_usuario" EntityType="Self.test_usuario" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="fk_habId" Association="Self.fk_habId">
+      <End Role="test_habilidades" EntitySet="test_habilidades" />
+      <End Role="test_habilidades_usuario" EntitySet="test_habilidades_usuario" />
+    </AssociationSet>
+    <AssociationSet Name="fk_usuId" Association="Self.fk_usuId">
+      <End Role="test_usuario" EntitySet="test_usuario" />
+      <End Role="test_habilidades_usuario" EntitySet="test_habilidades_usuario" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

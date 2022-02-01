@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DB_RegistroCrudModelStoreContainer" CdmEntityContainer="DB_RegistroCrudEntities">
+    <EntitySetMapping Name="test_habilidades">
+      <EntityTypeMapping TypeName="DB_RegistroCrudModel.test_habilidades">
+        <MappingFragment StoreEntitySet="test_habilidades">
+          <ScalarProperty Name="hab_id" ColumnName="hab_id" />
+          <ScalarProperty Name="hab_nombre" ColumnName="hab_nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="test_habilidades_usuario">
+      <EntityTypeMapping TypeName="DB_RegistroCrudModel.test_habilidades_usuario">
+        <MappingFragment StoreEntitySet="test_habilidades_usuario">
+          <ScalarProperty Name="habilidades_usuario_usuCed" ColumnName="habilidades_usuario_usuCed" />
+          <ScalarProperty Name="habilidades_usuario_habId" ColumnName="habilidades_usuario_habId" />
+          <ScalarProperty Name="habilidades_usuario_activo" ColumnName="habilidades_usuario_activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="test_usuario">
+      <EntityTypeMapping TypeName="DB_RegistroCrudModel.test_usuario">
+        <MappingFragment StoreEntitySet="test_usuario">
+          <ScalarProperty Name="usu_ced" ColumnName="usu_ced" />
+          <ScalarProperty Name="usu_tipoUsuario" ColumnName="usu_tipoUsuario" />
+          <ScalarProperty Name="usu_nombreCompleto" ColumnName="usu_nombreCompleto" />
+          <ScalarProperty Name="usu_correo" ColumnName="usu_correo" />
+          <ScalarProperty Name="usu_tipoIdent" ColumnName="usu_tipoIdent" />
+          <ScalarProperty Name="usu_usuario" ColumnName="usu_usuario" />
+          <ScalarProperty Name="usu_clave" ColumnName="usu_clave" />
+          <ScalarProperty Name="usu_activo" ColumnName="usu_activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="test_actualizar" FunctionName="DB_RegistroCrudModel.Store.test_actualizar" />
+    <FunctionImportMapping FunctionImportName="test_eliminar" FunctionName="DB_RegistroCrudModel.Store.test_eliminar" />
+    <FunctionImportMapping FunctionImportName="test_insertar" FunctionName="DB_RegistroCrudModel.Store.test_insertar" />
+    <FunctionImportMapping FunctionImportName="test_insertarHabilidad" FunctionName="DB_RegistroCrudModel.Store.test_insertarHabilidad" />
+    <FunctionImportMapping FunctionImportName="test_login" FunctionName="DB_RegistroCrudModel.Store.test_login">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_RegistroCrudModel.test_login_Result">
+          <ScalarProperty Name="usu_ced" ColumnName="usu_ced" />
+          <ScalarProperty Name="usu_tipoUsuario" ColumnName="usu_tipoUsuario" />
+          <ScalarProperty Name="usu_nombreCompleto" ColumnName="usu_nombreCompleto" />
+          <ScalarProperty Name="usu_correo" ColumnName="usu_correo" />
+          <ScalarProperty Name="usu_tipoIdent" ColumnName="usu_tipoIdent" />
+          <ScalarProperty Name="usu_usuario" ColumnName="usu_usuario" />
+          <ScalarProperty Name="usu_clave" ColumnName="usu_clave" />
+          <ScalarProperty Name="usu_activo" ColumnName="usu_activo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="test_mostrar" FunctionName="DB_RegistroCrudModel.Store.test_mostrar">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="DB_RegistroCrudModel.test_mostrar_Result">
+          <ScalarProperty Name="usu_ced" ColumnName="usu_ced" />
+          <ScalarProperty Name="usu_tipoUsuario" ColumnName="usu_tipoUsuario" />
+          <ScalarProperty Name="usu_nombreCompleto" ColumnName="usu_nombreCompleto" />
+          <ScalarProperty Name="usu_correo" ColumnName="usu_correo" />
+          <ScalarProperty Name="usu_tipoIdent" ColumnName="usu_tipoIdent" />
+          <ScalarProperty Name="usu_usuario" ColumnName="usu_usuario" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="test_mostrarHabilidades" FunctionName="DB_RegistroCrudModel.Store.test_mostrarHabilidades" />
+  </EntityContainerMapping>
+</Mapping>
